@@ -26,23 +26,32 @@ class DataSlice(object):
                  + "\nProximity sensor: " + str(self.proximity)
                  + "\nSound Level: " + str(self.sound)
                  + "\nLocation Data: " + str(self.location)
+                 + "\nSatellites: " + str(self.satellites)
                  + "\nTime Since Start: " + str(self.time)
                  + "\nDate " + str(self.date_time + "\n"))
 
     def csv(self):
-        return (",".join(self.accelerometer) +
-                ",".join(self.gravity) +
-                ",".join(self.acceleration) +
-                ",".join(self.gyroscope) +
-                ",".join(self.light))
+        return (",".join(self.accelerometer) + "," +
+                ",".join(self.gravity) + "," +
+                ",".join(self.acceleration) + "," +
+                ",".join(self.gyroscope) + 
+                "," + self.light + ","
+                ",".join(self.mag_field) + "," +
+                ",".join(self.orientation) + "," +
+                "," + self.proximity + 
+                "," + self.sound + ","
+                ",".join(self.location) + 
+                "," + self.satellites +
+                "," + self.time +
+                "," + self.date_time)
+        
+
 def csv_next_slice():
-    first_line = True
     for line in generator():
-        if first_line:
-            continue
-        sl = DataSlice(tuple(line[0:3]), tuple(line[3:6]), tuple(line[6:9]), tuple(line[9:12]), line[12], tuple(line[12:15]), tuple(line[15:18]), line[18], line[19], tuple(line[20:27]), line[28], line[29], line[30])
+        sl = DataSlice(tuple(line[0:3]), tuple(line[3:6]), tuple(line[6:9]), tuple(line[9:12]), line[12], tuple(line[13:16]), tuple(line[16:19]), line[19], line[20], tuple(line[21:28]), line[28], line[29], line[30])
         yield(sl)
 
+
 for sl in csv_next_slice():
-    sl.csv()
-    break
+    print(sl.csv())
+
