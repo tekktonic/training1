@@ -9,8 +9,7 @@ def generator():
                 firstline = False
                 continue
             yield(row)
-
-
+            
 data = generator()
 
 def returnData():

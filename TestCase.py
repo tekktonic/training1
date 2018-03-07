@@ -6,7 +6,6 @@ from csvfile import returnData
 def test_bool():
     assert True
 
-
 def test_empty_index():
     data = returnData()
     for i in data:
