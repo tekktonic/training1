@@ -8,3 +8,6 @@ def generator():
 
 
 data = generator()
+
+def returnData():
+    return data
